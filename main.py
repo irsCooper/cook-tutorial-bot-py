@@ -1,11 +1,11 @@
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import Command, CommandStart
 
-from core.handlers.basic import get_start
-from core.utils.comands import set_comands
-from core.settings import settings
+from app.handlers import basic
+from app.utils.comands import set_comands
+from app.settings import settings
 
-from asyncio import run
+import asyncio
 import logging
 
 
@@ -16,15 +16,9 @@ async def start():
 
     dp = Dispatcher() 
 
-
-    # dp.startup.register(admin_info_start_bot)
-    # dp.shutdown.register(admin_info_stop_bot)
-    dp.message.register(get_start, CommandStart)
-    # dp.message.register(, F.text == 'Смотреть рецепты')
-    # dp.message.register(, F.text == 'Добавить')
-    # dp.message.register(, F.text == 'Мои рецепты')
-    # dp.message.register(, F.text == 'Избранное')
-
+    dp.include_routers(
+        basic.router
+    )
 
     await set_comands(bot)
 
@@ -46,4 +40,7 @@ async def start():
 
 
 if __name__ == '__main__':
-    run(start())
+    try:
+        asyncio.run(start())
+    except KeyboardInterrupt:
+        logging.error(msg='exit')

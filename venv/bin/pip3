@@ -1,4 +1,4 @@
-#!/home/crowley/Музыка/postgresql-aiogram-bot-py/venv/bin/python3
+#!/home/crowley/Музыка/cook-tutorial-bot-py/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

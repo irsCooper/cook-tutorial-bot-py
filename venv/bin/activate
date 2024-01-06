@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/crowley/Музыка/postgresql-aiogram-bot-py/venv"
+VIRTUAL_ENV="/home/crowley/Музыка/cook-tutorial-bot-py/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
