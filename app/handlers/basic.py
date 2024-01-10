@@ -5,7 +5,7 @@ from aiogram.filters import Command, CommandStart
 from app.keyboards.replay import menu_keyboard
 from app.utils.text import helloUser
 
-router = Router()
+router: Router = Router()
 
 @router.message(CommandStart())
 async def start_handler(message: Message):

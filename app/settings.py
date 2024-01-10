@@ -10,8 +10,9 @@ class Bots:
 
 @dataclass
 class DB:
+    mode: str
     host: str
-    port: str
+    port: int
     user: str
     password: str
     db_name: str
@@ -33,8 +34,9 @@ def get_settings(path: str):
             admin_id=env.int('ADMIN')
         ),
         db=DB(
+            mode=env.str('MODE'),
             host=env.str('HOST'),
-            port=env.str('PORT'),
+            port=int(env.str('PORT')),
             user=env.str('USER'),
             password=env.str('PASSWORD'),
             db_name=env.str('DB_NAME')
