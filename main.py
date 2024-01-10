@@ -3,6 +3,7 @@ from aiogram.filters import Command, CommandStart
 
 from app.handlers import basic
 from app.utils.comands import set_comands
+from app.middlewares.register_check import RegisterCheck
 from app.settings import settings
 
 from app.data.base import BaseModel
@@ -18,6 +19,10 @@ async def start():
 
     bot = Bot(token=settings.bots.token, parse_mode='HTML')
     dp = Dispatcher() 
+    
+    # переделать в функцию
+    dp.message.middleware(RegisterCheck())
+    dp.callback_query.middleware(RegisterCheck())
 
     dp.include_routers(
         basic.router
@@ -37,12 +42,12 @@ async def start():
         )
     )
     
-    # session_maker = get_sesson_maker(async_engine)
+    session_maker = get_sesson_maker(async_engine)
     await procced_schemas(async_engine, BaseModel.metadata)
 
 
     try:
-        await dp.start_polling(bot)
+        await dp.start_polling(bot, session_maker=session_maker, bott=bot)
     finally:
         await bot.session.close()
 
