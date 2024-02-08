@@ -7,9 +7,6 @@ from sqlalchemy.orm import sessionmaker
 def create_async_engine(url: URL | str) -> AsyncEngine:
     return _create_async_engine(url=url, echo=True, pool_pre_ping=True)
 
-async def procced_schemas(engine: AsyncEngine, metadata) -> None:
-    async with engine.begin() as conn:
-        await conn.run_sync(metadata.create_all)
 
 def get_sesson_maker(engine: AsyncEngine) -> sessionmaker:
     return sessionmaker(engine, class_=AsyncSession)

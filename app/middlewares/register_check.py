@@ -20,7 +20,7 @@ class RegisterCheck(BaseMiddleware):
         data: Dict[str, Any]
     ) -> Any:
         session_maker: sessionmaker = data['session_maker']
-        bot: Bot = data['bott']
+        bot: Bot = data['bot']
         async with session_maker() as session:
             async with session.begin():
                 result = await session.execute(select(User).where(User.tg_id == event.from_user.id))
@@ -29,7 +29,7 @@ class RegisterCheck(BaseMiddleware):
                 if user is not None:
                     await bot.send_message(
                         chat_id=settings.bots.admin_id,
-                        text=f'Новый пользователь! id: {event.from_user.id}, name: {event.from_user.first_name}', 
+                        text=f'id: {event.from_user.id}, name: {event.from_user.first_name}', 
                     )
                     pass
                 else:
@@ -41,7 +41,7 @@ class RegisterCheck(BaseMiddleware):
                     
                     await bot.send_message(
                         chat_id=settings.bots.admin_id,
-                        text=f'id: {event.from_user.id}, name: {event.from_user.first_name}', 
+                        text=f'Новый пользователь! id: {event.from_user.id}, name: {event.from_user.first_name}', 
                     )
                     
                     # оставлю на будущее как подсказку, если сообщение | если нажали на кнопку

@@ -1,7 +1,7 @@
 from aiogram.types import Message
 
 
-def helloUser(name: str) -> str:
+def msg_start(name: str) -> str:
     return f"""Здравствуй, {name}!
 
 Я собрал большой список рецептов, наверняка среди них есть тот, который подойдет именно тебе.
